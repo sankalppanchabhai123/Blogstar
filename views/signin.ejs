@@ -8,11 +8,17 @@
     <%- include('./partials/navbar') %>
     <div class="container">
         <form action="/user/signin" method="post">
-            <label>SignUp page</label>
-            <input type="email" placeholder="Enter your email"/>
-            <input type="password" placeholder="password"/>
-            <button>signin</button>
-        </form>
+  <div class="mb-3">
+    <label for="email" class="form-label">Email address</label>
+    <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp">
+    <div id="email" class="form-text">We'll never share your email with anyone else.</div>
+  </div>
+  <div class="mb-3">
+    <label for="password" class="form-label">Password</label>
+    <input type="password" name="password" class="form-control" id="password">
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
         
     </div>
     <%- include('./partials/script') %>
