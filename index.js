@@ -1,7 +1,10 @@
 const express=require("express");
 const app= express();
 const path=require("path");
+
 const userRoute=require('./routes/user')
+const addblogRouter=require('./routes/blog')
+
 const mongoose=require("mongoose")
 const cookiePaser=require('cookie-parser');
 const { checkForAuthenticationCookie } = require("./middleware/authenticationMid");
@@ -24,7 +27,7 @@ app.get("/",(req,res)=>{
     });
 });
 
-
 app.use("/user",userRoute);
+app.use("/blog",addblogRouter);
 
 app.listen(8000,()=> console.log("App is running on port 8000"))

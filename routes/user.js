@@ -27,8 +27,11 @@ router.post("/signin",async (req,res)=>{
         return res.render("signin",{
             error:"Incorrect Email/Password"
         })
-    }
-    
+    } 
+})
+
+router.get("/logout",(req,res)=>{
+    res.clearCookie("token").redirect("/");
 })
 
 module.exports=router;
