@@ -7,14 +7,14 @@
 <body>
     <%- include('./partials/navbar') %>
         <div class="container mt-3">
-            <form action="/blog/add-new" method="post">
+            <form action="/blog/add-new" method="post" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="coverImage" class="form-label">Cover Image</label>
-                    <input type="file" class="form-control" id="coverImage" aria-describedby="coverImage">
+                    <input type="file" name="coverImage" class="form-control" id="coverImage" aria-describedby="coverImage">
                 </div>
                 <div class="mb-3">
                     <label for="title" class="form-label">Title</label>
-                    <input type="text" class="form-control" id="title" aria-describedby="title">
+                    <input name="title" type="text" class="form-control" id="title" aria-describedby="title">
                 </div>
                 <div class="mb-3">
                     <label for="body">Body</label>
