@@ -4,15 +4,15 @@ const { Schema, model}= require("mongoose");
 const blogSchema=new Schema({
     title:{
         type:String,
-        require:true,
+        required:true,
     },
     body:{
          type:String,
-        require:true,
+        required:true,
     },
     coverImageURL:{
         type:String,
-        require:false,
+        required:false,
     },
     createdBy:{
         type:Schema.Types.ObjectId,

@@ -18,7 +18,7 @@ const userSchema=new mongoose.Schema({
     },
     password:{
         type:String,
-        require:true,
+        required:true,
         unique:true,
     },
     profile_photo:{
@@ -45,7 +45,6 @@ userSchema.pre("save",function (next){
     
     this.salt=salt;
     this.password=hashedPasswor;
-
     next(); 
 })
 
