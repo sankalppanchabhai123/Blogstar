@@ -21,10 +21,10 @@ const userSchema=new mongoose.Schema({
         required:true,
         unique:true,
     },
-    profile_photo:{
-        type:String,
-        default:"/public/images/default.png"
-    },
+    profile_photo: {
+    type: String,
+    default: "/public/images/default.png"
+},
     role:{
         type:String,
         enum: ['USER','ADMIN'],
