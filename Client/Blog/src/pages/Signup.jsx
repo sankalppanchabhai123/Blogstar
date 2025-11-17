@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { ShipWheelIcon } from "lucide-react"
-import { Link, useMatch } from "react-router";
+// import { Link, useMatch } from "react-router";
 // import { useMutation, useQueryClient } from '@tanstack/react-query';
 // import { ApiSignup } from '../lib/signupFunction';
 // import { axiosInstance } from '../lib/axios';
+import axios from 'axios';
 
 function Signup() {
     const [signupData, setsignupData] = useState({
@@ -20,18 +21,21 @@ function Signup() {
     //     },
     //     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["authUser"] }),
     // })
-    const handelSignup = (e) => {
+    const handelSignup = async (e) => {
         e.preventDefault();
-        signupMutation(signupData);
-        // const data=
+        try {
+            const res = await axios.post("http://localhost:8000/user/signup", signupData, {
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+            console.log(res.data);
+            alert("Signup successful!");
+        } catch (error) {
+            console.error(error);
+            alert(error.response?.data?.error || "Signup failed");
+        }
     }
-    // return (
-    //     <>
-    //         <div>
-    //             This is sign up page
-    //         </div>
-    //     </>
-    // )
     return (
         <div className='h-screen flex items-center justify-center p-4 sm:p-6 md:p-8' data-theme="dark">
             <div className="border border-primary/25 flex flex-col lg:flex-row w-full max-w-5xl mx-auto bg-base-100
@@ -145,4 +149,4 @@ function Signup() {
     )
 }
 
-export default Signup
+export default Signup;

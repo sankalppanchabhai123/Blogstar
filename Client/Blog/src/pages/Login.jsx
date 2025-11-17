@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { ShipWheelIcon } from "lucide-react"
 
 
-function Signup() {
+function Login() {
     const [signupData, setsignupData] = useState({
         email: "",
         password: ""
@@ -131,4 +131,4 @@ function Signup() {
     )
 }
 
-export default Signup
+export default Login
