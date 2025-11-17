@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const path = require("path");
+const cors = require("cors");
 
 require("dotenv").config();
 
@@ -12,6 +13,9 @@ const mongoose = require("mongoose")
 const cookiePaser = require('cookie-parser');
 const { checkForAuthenticationCookie } = require("./middleware/authenticationMid");
 const Blog = require("./modules/blog");
+const { url } = require("inspector");
+const { appendFile } = require("fs");
+const User = require("./modules/user");
 
 mongoose.connect(process.env.MONGO_URL)
     .then((e) => console.log("mongodb is connected"))
@@ -20,6 +24,11 @@ mongoose.connect(process.env.MONGO_URL)
 app.set("view engine", "ejs");
 app.set("views", path.resolve("./views"));
 
+app.use(cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+}))
+app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookiePaser());
 app.use(checkForAuthenticationCookie("token"))
@@ -34,6 +43,7 @@ app.get("/", async (req, res) => {
     });
 });
 
+// Routes
 app.use("/user", userRoute);
 app.use("/blog", addblogRouter);
 
