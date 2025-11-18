@@ -1,33 +1,30 @@
 import React, { useEffect, useState } from 'react'
 import { ShipWheelIcon } from "lucide-react"
-
+import axios from 'axios'
 
 function Login() {
-    const [signupData, setsignupData] = useState({
+    const [signinData, setsigninData] = useState({
         email: "",
         password: ""
     })
-
-    // const queryClient = useQueryClient();
-    // const { mutate: signupMutation, isPending, error } = useMutation({
-    //     mutationFn: async () => {
-    //         const response = await axiosInstance.post("/auth/signup", signupData);
-    //         return response.data;
-    //     },
-    //     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["authUser"] }),
-    // })
-    const handelSignup = (e) => {
+    const handelSignin = async (e) => {
         e.preventDefault();
-        signupMutation(signupData);
-        // const data=
+        try {
+            const res = await axios.post("http://localhost:8000/user/login", signinData, {
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+            console.log(res.data);
+            alert("Login successful!");
+            // Redirect or handle token
+            window.location.href = "/";
+        } catch (error) {
+            console.error(error);
+            alert(error.response?.data?.error || "Login failed");
+        }
     }
-    // return (
-    //     <>
-    //         <div>
-    //             This is sign up page
-    //         </div>
-    //     </>
-    // )
+
     return (
         <div className='h-screen flex items-center justify-center p-4 sm:p-6 md:p-8' data-theme="dark">
             <div className="border border-primary/25 flex flex-col lg:flex-row w-full max-w-5xl mx-auto bg-base-100
@@ -50,7 +47,7 @@ function Login() {
                         </div>
                     )} */}
                     <div className='w-full'>
-                        <form onSubmit={handelSignup}>
+                        <form onSubmit={handelSignin}>
                             <div className='space-y-4'>
                                 <div>
                                     <h2 className='text-xl font-semibold'>Login your Account</h2>
@@ -66,8 +63,8 @@ function Login() {
                                         <input type='email'
                                             placeholder="example@gmail.com"
                                             className='input input-bordered w-full'
-                                            value={signupData.email}
-                                            onChange={(e) => setsignupData({ ...signupData, email: e.target.value })}
+                                            value={signinData.email}
+                                            onChange={(e) => setsigninData({ ...signinData, email: e.target.value })}
                                             required />
                                         <label className='lable'>
                                             <span className='lable-text'>Password</span>
@@ -75,37 +72,16 @@ function Login() {
                                         <input type='password'
                                             placeholder="************"
                                             className='input input-bordered w-full'
-                                            value={signupData.password}
-                                            onChange={(e) => setsignupData({ ...signupData, password: e.target.value })}
+                                            value={signinData.password}
+                                            onChange={(e) => setsigninData({ ...signinData, password: e.target.value })}
                                             required />
                                         <p className='text-x5 opacity-70 mt-1'>Password must be at last 6 characters long</p>
                                     </div>
 
-                                    <div className='form-control'>
-                                        <label className='lable cursor-pointer justify-start gap-2'>
-                                            <input type='checkbox' className='checkbox checkbox-sm' required />
-                                            <span className='text-xs leading-tight'>
-                                                I agree to the{" "}
-                                                <span className='text-primary hover:underline'>terms of service</span> and{" "}
-                                                <span className='text-primary hover:underline'>privacy policy</span>
-                                            </span>
-                                        </label>
-                                    </div>
-
                                     <button className='btn btn-primary w-full' type='submit'>
-                                        {/* {isPending ? "Signing up..." : "Create Account"} */}
-                                        SignUp
+                                        Login
                                     </button>
 
-
-                                    <div className='text-center mt-4'>
-                                        <p className='text-sm'>
-                                            Already have account?{" "}
-                                            {/* <Link to="/login" className='text-primary hover:underline'>
-                                                Sign in
-                                            </Link> */}
-                                        </p>
-                                    </div>
                                 </div>
                             </div>
                         </form>

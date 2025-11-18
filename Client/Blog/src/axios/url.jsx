@@ -1,8 +1,6 @@
-const axios = require('axios');
+import axios from "axios"
 
-function url() {
-    new axios({
-        baseURL: "/user",
-
-    })
-}
+export const axiosInstance = axios.create({
+    baseURL: "http://localhost:8000",
+    withCredentials: true,
+})
