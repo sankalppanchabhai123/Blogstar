@@ -1,4 +1,5 @@
 import './App.css'
+import Homepage from './pages/Homepage'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 
@@ -7,11 +8,10 @@ import { Routes, Route } from 'react-router'
 
 
 function App() {
-  // const [count, setCount] = useState(0)
-
   return (
     <div className="h-screen text-1xl " data-theme="coffee">
       <Routes>
+        <Route path="/" element={<Homepage />} />
         <Route path="/user/signup" element={<Signup />} />
         <Route path="/user/login" element={<Login />} />
         <Route path="/contact" element={<Signup />} />
